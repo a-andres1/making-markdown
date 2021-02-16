@@ -6,6 +6,11 @@ var fs = require('fs');
 const questions = [  inquirer.prompt([
     {
         type: "input",
+        name: "fileName",
+        message:"What should we call your file?",
+    },
+    {
+        type: "input",
         name: "title",
         message:"What is your project title?",
     },
@@ -13,6 +18,11 @@ const questions = [  inquirer.prompt([
         type: "input",
         name: "desctiption",
         message:"Tell me about your project.",
+    },
+    {
+        type: "input",
+        name: "tech",
+        message:"What languages and technologies did you use?",
     },
     {
         type: "input",
@@ -41,6 +51,16 @@ const questions = [  inquirer.prompt([
     },
     {
         type: "input",
+        name: "repo",
+        message:"What is the link to your repo?",
+    },
+    {
+        type: "input",
+        name: "deployed",
+        message:"What is the link to your deployed app?",
+    },
+    {
+        type: "input",
         name: "github",
         message:"What is your GitHub username?",
     },
@@ -56,7 +76,38 @@ const questions = [  inquirer.prompt([
 
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    return `
+    # ${data.title}
+
+    ## Description
+    ${data.desctiption}
+    
+    ## Technologies Used
+    ${data.tech}
+    
+    ## Install
+    ${data.install}
+    
+    ## Usage
+    ${data.usage}
+    
+    ## Credits
+    ${data.contributions}
+    ${data.resources}
+    
+    ## License Info
+    ${data.license} 
+    
+    ## Links
+    [Repo](${data.repo})
+    [Site](${data.deployed})
+    
+    ## Contact Info
+    [email me](mailto:${data.email})  
+    [find me on github](${data.github})`
+    
+}
 
 // TODO: Create a function to initialize app
 function init() {}
