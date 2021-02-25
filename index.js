@@ -3,32 +3,19 @@ var inquirer = require("inquirer");
 var fs = require('fs');
 var markdown = require('./utils/generateMarkdown')
 
+
 // TODO: Create an array of questions for user input
 const questions = [  
-    {
-        type: "input",
-        name: "fileName",
-        message:"What should we call your file?",
-    },
+
     {
         type: "input",
         name: "title",
         message:"What is your project title?",
     },
     {
-        type: "list",
-        name: "license",
-        message:"What kind of license would you like to use?",
-        choices: [
-            'MIT',
-            'Apache',
-            'Unlicense',
-        ]
-    },
-    {
         type: "input",
         name: "desctiption",
-        message:"Tell me about your project.",
+        message:"Tell us about your project.",
     },
     {
         type: "input",
@@ -71,6 +58,20 @@ const questions = [
         message:"What is the link to your deployed app?",
     },
     {
+        type: "list",
+        name: "license",
+        message:"What kind of license do you require?",
+        choices: [
+            'MIT',
+            'GPLv2',
+            'GPLv3',
+            'Apache',
+            'BDS 3-clause',
+            'BDS 2-clause',
+            'Unlicense',
+        ]
+    },
+    {
         type: "input",
         name: "github",
         message:"What is your GitHub username?",
@@ -92,6 +93,7 @@ function writeToFile(fileName, data) {
         if(err) throw err
     } )
 //   
+
 }
 
 // TODO: Create a function to initialize app
