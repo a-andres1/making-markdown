@@ -1,18 +1,12 @@
 // TODO: Include packages needed for this application
 var inquirer = require("inquirer");
 var fs = require('fs');
-const generateMarkdown = require("./utils/generateMarkdown");
-const renderLicenseLink = require("./utils/generateMarkdown");
-const renderLicenseBadge = require("./utils/generateMarkdown");
-const renderLicenseSection = require("./utils/generateMarkdown");
+var markdown = require('./utils/generateMarkdown')
+
 
 // TODO: Create an array of questions for user input
-const questions = [  inquirer.prompt([
-    {
-        type: "input",
-        name: "filename",
-        message:"What should we call your file?",
-    },
+const questions = [  
+
     {
         type: "input",
         name: "title",
@@ -87,40 +81,29 @@ const questions = [  inquirer.prompt([
         name: "email",
         message:"What is your email?",
     },
-]).then(function(data) {
-    // console.log(data);
-    var licenseName = data.license;
-    console.log(licenseName);
-    // renderLicenseLink(licenseName);
-    // renderLicenseBadge(licenseName);
-    // renderLicenseSection(licenseName);
-    // $.ajax({
-    //     url: "application/vnd.github.v3+json",
-    //     method: "GET",
-    //     dataType: "json",
-    //     license: licenseName
-    // }).then(function (response){
-    // console.log(response)
-    // })
-    // try {await octokit.request('GET /licenses/{license}', {
-    //     license: licenseName
-    //   })} catch(error){
-    //     console.log("nope")
-    // }
-    
-})];
+
+];
 
 
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    // this should be the async functions for writing to the file. I'm not sure what to do with the fileName part yet... 
-    generateMarkdown(data)
-    
+
+    fs.writeFile(fileName, markdown(data), err => {
+        if(err) throw err
+    } )
+//   
+
 }
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+
+inquirer.prompt(questions)
+    .then(function(data) {
+        writeToFile("README.md", data)
+    })
+}
 
 // Function call to initialize app
 init();

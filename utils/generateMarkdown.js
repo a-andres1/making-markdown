@@ -1,33 +1,47 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-function renderLicenseBadge(licenseName) {
-  console.log(licenseName);
-  $.ajax({
-    url: "application/vnd.github.v3+json",
-    method: "GET",
-    dataType: "json",
-    license: licenseName
-}).then(function (response){
-console.log(response)
-})
+
+function renderLicenseBadge(license) {
+  if (license === 'MIT'){
+    return "https://img.shields.io/badge/License-MIT-yellow.svg"
+  }
+
+
 }
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(licenseName) {
-  console.log(licenseName);
+
+function renderLicenseLink(license) {
+  if (license === 'MIT'){
+    return "https://opensource.org/licenses/MIT"
+  }
+
 }
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(licenseName) {
-  console.log(licenseName);
+
+function renderLicenseSection(license) {
+  var lbadge = renderLicenseBadge(license);
+  var llink = renderLicenseLink(license);
+  return `![${license}](${lbadge})  
+
+  [${license}](${llink})  
+  
+  `
+
+
 }
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
+
+var lsection = renderLicenseSection(data.license);
+
   return `
-  # ${data.title}
+  # ${data.title} 
+
 
   ## Description
   ${data.desctiption}
@@ -42,22 +56,22 @@ function generateMarkdown(data) {
   ${data.usage}
   
   ## Credits
-  ${data.contributions}
+  ${data.contributions}  
   ${data.resources}
   
   ## License Info
-  ${data.license} 
+  ${lsection}
+
+
   
   ## Links
-  [Repo](${data.repo})
-  [Site](${data.deployed})
+  [Repo](${data.repo})  
+  [Site](${data.deployed})  
   
   ## Contact Info
-  [email me](mailto:${data.email})  
-  [find me on github](${data.github})`;
+  [email me](mailto:${data.email})    
+  [find me on github](${data.github})  
+  `
 }
 
 module.exports = generateMarkdown;
-module.exports = renderLicenseBadge;
-module.exports = renderLicenseLink;
-module.exports = renderLicenseSection;
