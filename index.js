@@ -1,11 +1,15 @@
 // TODO: Include packages needed for this application
 var inquirer = require("inquirer");
 var fs = require('fs');
-var markdown = require('./utils/generateMarkdown')
+var markdown = require('./utils/generateMarkdown');
+const util = require('util');
+
+const writeFileAsync = util.promisify(fs.writeFile);
 
 
 // TODO: Create an array of questions for user input
-const questions = [  
+function askQuestions() {
+return inquirer.prompt([  
 
     {
         type: "input",
@@ -82,7 +86,8 @@ const questions = [
         message:"What is your email?",
     },
 
-];
+]);
+};
 
 
 
@@ -97,13 +102,24 @@ function writeToFile(fileName, data) {
 }
 
 // TODO: Create a function to initialize app
-function init() {
+async function init() {
 
-inquirer.prompt(questions)
-    .then(function(data) {
-        writeToFile("README.md", data)
-    })
-}
+    try {
+        const answers = await askQuestions();
+    
+        const readMe = markdown(answers);
+    
+        await writeFileAsync("README.md", readMe );
+    
+        console.log("Successfully wrote README");
+      } catch(err) {
+        console.log(err);
+      }
+
+
+};
+
+
 
 // Function call to initialize app
 init();
