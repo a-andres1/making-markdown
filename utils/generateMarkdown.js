@@ -106,7 +106,7 @@ var lsection = renderLicenseSection(data.license);
   
   ## Contact Info
   [email me](mailto:${data.email})    
-  [find me on github](${data.github})  
+  [find me on github](https://github.com/${data.github})  
   `
 }
 
