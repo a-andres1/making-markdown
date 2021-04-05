@@ -1,6 +1,6 @@
 
   # Making Markdown 
-This took a little longer than I thought it would. I need a little extra time to figure out the async part, but now it is writing to the readme file. 
+This took a little longer than I thought it would. I needed a little extra time to figure out how async worked, but now it is writing to the readme file. It was fun to work with the command line, although understanding how the files would work together took me a second. It was difficult for me to understand this without the aid of the window, but after working it through with my tutor, it began to make more sense. 
 
   ## Description
   This app generates a readme through command line prompts, using node and inquirer.
