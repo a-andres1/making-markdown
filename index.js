@@ -49,7 +49,7 @@ return inquirer.prompt([
     {
         type: "input",
         name: "tests",
-        message:"question about tests",
+        message:"What should we know about tests?",
     },
     {
         type: "input",
